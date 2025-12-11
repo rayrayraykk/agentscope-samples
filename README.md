@@ -10,7 +10,7 @@
 [[中文README]](README_zh.md)
 
 🎯 **Kickstart Your Agent Journey!**
-This is a repository that **brings together a variety of ready‑to‑run Python agent examples**, ranging from command‑line mini‑tools to **full‑stack deployable applications**.
+This is a repository that **brings together a variety of ready-to-run Python agent examples**, ranging from command-line mini-tools to **full-stack deployable applications**.
 
 ## 🌟 What is AgentScope?
 
