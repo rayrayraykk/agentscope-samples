@@ -1,8 +1,5 @@
-# AgentScope Sample Agents
+# AgentScope Samples
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-25-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/agentscope-ai/agentscope-samples/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-%3E%3D3.10-blue)](https://www.python.org/)
 [![Docs](https://img.shields.io/badge/docs-AgentScope-blue)](https://doc.agentscope.io/)
@@ -11,50 +8,37 @@
 
 [[中文README]](README_zh.md)
 
-Welcome to the **AgentScope Sample Agents** repository! 🎯
-This repository provides **ready-to-use Python sample agents** built on top of:
+🎯 **Kickstart Your Agent Journey!**
+This is a repository that **brings together a variety of ready‑to‑run Python agent examples**, ranging from command‑line mini‑tools to **full‑stack deployable applications**.
 
-- [AgentScope](https://github.com/agentscope-ai/agentscope)
-- [AgentScope Runtime](https://github.com/agentscope-ai/agentscope-runtime)
+## 🌟 What is AgentScope?
 
-The examples cover a wide range of use cases — from lightweight command-line agents to **full-stack deployable applications** with both backend and frontend.
+**[AgentScope](https://github.com/agentscope-ai/agentscope)** is a **multi‑agent framework** that lets you rapidly build **LLM‑based intelligent applications**:
 
-------
+> Learn more in the [AgentScope Documentation](https://doc.agentscope.io/)
 
-## 📖 About AgentScope & AgentScope Runtime
+- 🧠 Define agents and integrate tools
+- 📡 Manage context and conversations
+- 🤝 Orchestrate collaboration among multiple agents to accomplish tasks
 
-### **AgentScope**
 
-AgentScope is a multi-agent framework designed to provide a **simple and efficient** way to build **LLM-powered agent applications**. It offers abstractions for defining agents, integrating tools, managing conversations, and orchestrating multi-agent workflows.
 
-### **AgentScope Runtime**
+**[AgentScope‑Runtime](https://github.com/agentscope-ai/agentscope-runtime)** is the runtime framework that enables you to deploy agents as API services:
 
-AgentScope Runtime is a **comprehensive runtime framework** that addresses two key challenges in deploying and operating agents:
+> Learn more in the [AgentScope Runtime Documentation](https://runtime.agentscope.io/)
 
-1. **Effective Agent Deployment** – Scalable deployment and management of agents across environments.
-2. **Sandboxed Tool Execution** – Secure, isolated execution of tools and external actions.
+1. 🔄 **Scalable deployment management for multiple agents**
+2. 🛡️ **Secure sandbox execution for tools**
 
-It includes **agent deployment** and **secure sandboxed tool execution**, and can be used with **AgentScope** or other agent frameworks.
+## ⚡ Getting Started
 
-------
+📌 **Before running an example**, please check the corresponding `README.md` for installation and execution instructions.
 
-## ✨ Getting Started
-
-- All samples are **Python-based**.
-- Samples are organized **by functional use case**.
-- Some samples use only **AgentScope** (pure Python agents).
-- Others use **both AgentScope and AgentScope Runtime** to implement **full-stack deployable applications** with frontend + backend.
-- Full-stack runtime versions have folder names ending with:
-  **`_fullstack_runtime`**
-
-> 📌 **Before running** any example, check its `README.md` for installation and execution instructions.
-
-### Install Requirements
-
-- [AgentScope Documentation](https://doc.agentscope.io/)
-- [AgentScope Runtime Documentation](https://runtime.agentscope.io/)
-
-------
+> - All examples are built with **Python**.
+> - Examples are organized by **functionality** and **usage scenario**.
+> - Some examples use **AgentScope** only.
+> - Some examples use **both AgentScope and AgentScope Runtime** to implement **deployable full-stack applications with frontend + backend**.
+> - Full-stack runtime versions have folder names ending with **`_fullstack_runtime`**.
 
 ## 🌳 Repository Structure
 
@@ -86,8 +70,6 @@ It includes **agent deployment** and **secure sandboxed tool execution**, and ca
 └── README.md
 ```
 
-------
-
 ## 📌 Example List
 
 | Category                | Example Folder                                        | Uses AgentScope | Use AgentScope Runtime | Description                                      |
@@ -107,11 +89,9 @@ It includes **agent deployment** and **secure sandboxed tool execution**, and ca
 | **General AI Agent**               | alias/                                                | ✅               | ✅                      | Agent application running in sandbox to solve diverse real-world problems |
 | **Financial Trading**   | evotraders/                                           | ✅               | ❌            | Self-Evolving Multi-Agent Trading System         |
 
-------
+## 🌈 Featured Examples
 
-## 🌟 Featured Examples
-
-### DataJuicer Agent
+### 📊 DataJuicer Agent
 
 A powerful multi-agent data processing system that leverages Data-Juicer's 200+ operators for intelligent data processing:
 
@@ -123,8 +103,7 @@ A powerful multi-agent data processing system that leverages Data-Juicer's 200+ 
 
 📖 **Documentation**: [English](data_juicer_agent/README.md) | [中文](data_juicer_agent/README_ZH.md)
 
-
-### Alias-Agent
+### 🕵🏻 Alias-Agent
 
 *Alias-Agent* (short for *Alias*) is designed to serve as an intelligent assistant for tackle diverse and complicated real-world tasks, providing three operational modes for flexible task execution:
 - **Simple React**: Employs vanilla reasoning-acting loops to iteratively solve problems and execute tool calls.
@@ -135,7 +114,7 @@ Beyond being a ready-to-use agent, we envision Alias as a foundational template 
 
 📖 **Documentation**: [English](alias/README.md) | [中文](alias/README_ZH.md)
 
-### EvoTraders
+### 📈 EvoTraders
 
 *EvoTraders* is a financial trading agent framework that builds a trading system capable of continuous learning and evolution in real markets through multi-agent collaboration and memory systems. Key features include:
 
@@ -146,9 +125,7 @@ Beyond being a ready-to-use agent, we envision Alias as a foundational template 
 
 📖 **Documentation**: [English](evotraders/README.md) | [中文](evotraders/README_zh.md)
 
-------
-
-## ℹ️ Getting Help
+## 🆘 Getting Help
 
 If you:
 
@@ -166,8 +143,6 @@ Please:
 |----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://gw.alicdn.com/imgextra/i1/O1CN01hhD1mu1Dd3BWVUvxN_!!6000000000238-2-tps-400-400.png" width="100" height="100"> | <img src="https://img.alicdn.com/imgextra/i1/O1CN01LxzZha1thpIN2cc2E_!!6000000005934-2-tps-497-477.png" width="100" height="100"> |
 
-------
-
 ## 🤝 Contributing
 
 We welcome contributions such as:
@@ -177,25 +152,17 @@ We welcome contributions such as:
 - Documentation improvements
 - Code contributions
 
-See the [Contributing](https://github.com/agentscope-ai/agentscope-samples/blob/main/CONTRIBUTING.md) for details.
-
-------
+See the [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## 📄 License
 
-This project is licensed under the **Apache 2.0 License** – see the [LICENSE](https://github.com/agentscope-ai/agentscope-samples/blob/main/LICENSE) file for details.
-
-
-------
-
-## 🔗 Resources
-
-- [AgentScope Documentation](https://doc.agentscope.io/)
-- [AgentScope Runtime Documentation](https://runtime.agentscope.io/)
-- [AgentScope GitHub Repository](https://github.com/agentscope-ai/agentscope)
-- [AgentScope Runtime GitHub Repository](https://github.com/agentscope-ai/agentscope-runtime)
+This project is licensed under the **Apache 2.0 License** – see the [LICENSE](LICENSE) file for details.
 
 ## Contributors ✨
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-25-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/emoji-key/)):
 
