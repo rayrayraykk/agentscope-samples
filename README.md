@@ -24,7 +24,7 @@ This is a repository that **brings together a variety of ready-to-run Python age
 
 
 
-**[AgentScope‑Runtime](https://github.com/agentscope-ai/agentscope-runtime)** is the runtime framework that enables you to deploy agents as API services:
+**[AgentScope-Runtime](https://github.com/agentscope-ai/agentscope-runtime)** is the runtime framework that enables you to deploy agents as API services:
 
 > Learn more in the [AgentScope Runtime Documentation](https://runtime.agentscope.io/)
 
