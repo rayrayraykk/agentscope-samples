@@ -14,7 +14,7 @@ This is a repository that **brings together a variety of ready-to-run Python age
 
 ## 🌟 What is AgentScope?
 
-**[AgentScope](https://github.com/agentscope-ai/agentscope)** is a **multi‑agent framework** that lets you rapidly build **LLM‑based intelligent applications**:
+**[AgentScope](https://github.com/agentscope-ai/agentscope)** is a **multi-agent framework** that lets you rapidly build **LLM-based intelligent applications**:
 
 > Learn more in the [AgentScope Documentation](https://doc.agentscope.io/)
 
