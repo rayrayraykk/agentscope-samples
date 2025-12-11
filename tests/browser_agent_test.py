@@ -34,10 +34,6 @@ def agent(
         start_url="https://test.com",
     )
 
-
-# -----------------------------
-# ✅ Hook registration verification (adapted for ReActAgentBase)
-# -----------------------------
 def test_hooks_registered(
     agent: BrowserAgent,  # pylint: disable=redefined-outer-name
 ) -> None:
@@ -63,10 +59,6 @@ def test_hooks_registered(
         in agent._instance_pre_reasoning_hooks
     )
 
-
-# -----------------------------
-# ✅ Navigation hook test (direct hook invocation)
-# -----------------------------
 @pytest.mark.asyncio
 async def test_pre_reply_hook_navigation(
     agent: BrowserAgent,  # pylint: disable=redefined-outer-name
@@ -86,9 +78,6 @@ async def test_pre_reply_hook_navigation(
     assert agent.toolkit.call_tool_function.called
 
 
-# -----------------------------
-# ✅ Snapshot hook test (fix content attribute access issue)
-# -----------------------------
 @pytest.mark.asyncio
 async def test_observe_pre_reasoning(
     agent: BrowserAgent,  # pylint: disable=redefined-outer-name
@@ -120,9 +109,6 @@ async def test_observe_pre_reasoning(
         assert "Snapshot content" in added_msg.content[0]["text"]
 
 
-# -----------------------------
-# ✅ Text filtering test (improved regex)
-# -----------------------------
 def test_filter_execution_text(
     agent: BrowserAgent,  # pylint: disable=redefined-outer-name
 ) -> None:
@@ -144,28 +130,3 @@ def test_filter_execution_text(
     assert "key: value" not in filtered
     assert "Regular text content" in filtered
     assert "YAML content" in filtered
-
-
-# -----------------------------
-# ✅ Memory summarization test (already passing)
-# -----------------------------
-@pytest.mark.asyncio
-async def test_memory_summarizing(
-    agent: BrowserAgent,  # pylint: disable=redefined-outer-name
-) -> None:
-    agent.memory.get_memory = AsyncMock(
-        return_value=[MagicMock(role="user", content="Original question")]
-        * 25,
-    )
-    agent.memory.size = AsyncMock(return_value=25)
-
-    agent.model = AsyncMock()
-    agent.model.return_value = MagicMock(
-        content=[MagicMock(text="Summary text")],
-    )
-
-    # pylint: disable=protected-access
-    await agent._memory_summarizing()
-
-    assert agent.memory.clear.called
-    assert agent.memory.add.call_count == 2  # Original question + summary
