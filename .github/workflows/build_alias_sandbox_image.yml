@@ -92,6 +92,7 @@ jobs:
           pip install agentscope-runtime loguru
 
       - name: Run build script for all types
+        working-directory: alias/src/alias/runtime/alias_sandbox
         env:
           AUTO_BUILD: "true"
         run: |
@@ -106,7 +107,7 @@ jobs:
           fi
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            runtime-sandbox-builder "$TYPE" --platform "$PLATFORM_INPUT" --dockerfile_path alias/src/alias/runtime/alias_sandbox/Dockerfile --extension alias/src/alias/runtime/alias_sandbox/alias_sandbox.py
+            runtime-sandbox-builder "$TYPE" --platform "$PLATFORM_INPUT" --dockerfile_path Dockerfile --extension alias_sandbox.py
           done
 
       - name: Tag & Push Images
