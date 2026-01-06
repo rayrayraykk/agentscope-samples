@@ -128,7 +128,7 @@ jobs:
           fi
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            IMAGE_BASE=$(python -c "from src.agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
+            IMAGE_BASE=$(python -c "from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
             IMAGE_NAME="${IMAGE_BASE%%:*}"
             if [ -n "$DOCKER_USERNAME" ] && [ -n "$DOCKER_PASSWORD" ]; then
               if [ "$SINGLE" = "true" ]; then
@@ -165,7 +165,7 @@ jobs:
           fi
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            IMAGE_BASE=$(python -c "from src.agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
+            IMAGE_BASE=$(python -c "from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
             IMAGE_NAME="${IMAGE_BASE%%:*}"
             AMD_TAG="docker.io/${IMAGE_NAME}:${TAG_INPUT}-linux-amd64"
             ARM_TAG="docker.io/${IMAGE_NAME}:${TAG_INPUT}-linux-arm64"
@@ -191,7 +191,7 @@ jobs:
           REG="agentscope-registry.ap-southeast-1.cr.aliyuncs.com"
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            IMAGE_BASE=$(python -c "from src.agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
+            IMAGE_BASE=$(python -c "from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
             IMAGE_NAME="${IMAGE_BASE%%:*}"
             AMD_TAG="${REG}/${IMAGE_NAME}:${TAG_INPUT}-linux-amd64"
             ARM_TAG="${REG}/${IMAGE_NAME}:${TAG_INPUT}-linux-arm64"
