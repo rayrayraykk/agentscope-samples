@@ -89,7 +89,7 @@ jobs:
       - name: Install dependencies
         run: |
           export PIP_DEFAULT_TIMEOUT=300
-          pip install agentscope-runtime
+          pip install agentscope-runtime loguru
 
       - name: Run build script for all types
         env:
