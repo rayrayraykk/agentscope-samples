@@ -3,14 +3,15 @@ import json
 import logging
 import os
 from datetime import datetime
-from typing import Tuple, Optional, Union, Dict, Any, Generator
 
 import requests
+
+from openai import OpenAI
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 logging.basicConfig(
     level=logging.INFO,
@@ -48,10 +49,10 @@ class User(db.Model):
         cascade="all, delete-orphan",
     )
 
-    def set_password(self, password: str) -> None:
+    def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
-    def check_password(self, password: str) -> bool:
+    def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
 
@@ -90,7 +91,7 @@ class Message(db.Model):
 # Create database tables
 
 
-def create_tables() -> None:
+def create_tables():
     db.create_all()
 
     # Create sample users (if none exist)
@@ -105,9 +106,7 @@ def create_tables() -> None:
 
 
 # functions
-def parse_sse_line(
-    line: bytes,
-) -> Tuple[Optional[str], Optional[Union[str, int]]]:
+def parse_sse_line(line):
     line = line.decode("utf-8").strip()
     if line.startswith("data: "):
         return "data", line[6:]
@@ -120,10 +119,7 @@ def parse_sse_line(
     return None, None
 
 
-def sse_client(
-    url: str,
-    data: Optional[Dict[str, Any]] = None,
-) -> Generator[str, None, None]:
+def sse_client(url, data=None):
     headers = {
         "Accept": "text/event-stream",
         "Cache-Control": "no-cache",
@@ -158,33 +154,25 @@ def sse_client(
                     pass
 
 
-def call_runner(
-    query: str,
-    query_user_id: str,
-    query_session_id: str,
-) -> Generator[str, None, None]:
+def call_runner(query):
     server_port = int(os.environ.get("SERVER_PORT", "8090"))
-    server_endpoint = os.environ.get("SERVER_ENDPOINT", "agent")
     server_host = os.environ.get("SERVER_HOST", "localhost")
 
-    url = f"http://{server_host}:{server_port}/{server_endpoint}"
-    data_arg: Dict[str, Any] = {
-        "input": [
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": query,
-                    },
-                ],
-            },
-        ],
-        "session_id": query_session_id,
-        "user_id": query_user_id,
-    }
-    for content in sse_client(url, data=data_arg):
-        yield content
+    client = OpenAI(
+        base_url=f"http://{server_host}:{server_port}/compatible-mode/v1",
+    )
+
+    stream = client.responses.create(
+        model="any_name",
+        input=query,
+        stream=True,
+    )
+
+    for chunk in stream:
+        if hasattr(chunk, "delta"):
+            yield chunk.delta
+        else:
+            yield ""
 
 
 # API routes
@@ -369,11 +357,9 @@ def send_message(conversation_id):
         ai_response_text = ""
 
         question = text
-        conversation_id_str = str(conversation_id)
+
         for item in call_runner(
             question,
-            conversation_id_str,
-            conversation_id_str,
         ):
             ai_response_text += item
 

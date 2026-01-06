@@ -6,14 +6,13 @@ import type { InputRef } from "antd";
 
 import { Image, Avatar, Spin } from "antd";
 import { Flex } from "antd";
-import Browser from "./Browser";
 
 const { Content, Footer } = Layout;
 
 const REACT_APP_API_URL =
   process.env.REACT_APP_API_URL || "http://localhost:9000";
 const BACKEND_URL = REACT_APP_API_URL + "/v1/chat/completions";
-const BACKEND_WS_URL = REACT_APP_API_URL + "/env_info";
+const BACKEND_DESLKTOP_URL = REACT_APP_API_URL + "/env_info";
 const DEFAULT_MODEL = "qwen-max";
 const systemMessage = {
   role: "system",
@@ -37,7 +36,7 @@ const { Search } = Input;
 const App: React.FC = () => {
   const inputRef = useRef<InputRef>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const [webSocketUrl, setWebSocketUrl] = useState("");
+  const [desktopUrl, setDesktopUrl] = useState("");
   const handleFocus = () => {
     if (inputRef.current) {
       inputRef.current.select();
@@ -57,8 +56,8 @@ const App: React.FC = () => {
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
-  async function get_ws() {
-    const response = await fetch(BACKEND_WS_URL, {
+  async function get_desktop_url() {
+    const response = await fetch(BACKEND_DESLKTOP_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -74,11 +73,11 @@ const App: React.FC = () => {
 
     const data = await response.json();
     console.log(data);
-    setWebSocketUrl(data.url);
+    setDesktopUrl(data.url);
   }
 
   const handleSend = async (message: string) => {
-    await get_ws();
+    await get_desktop_url();
     setCollapsed(true);
     if (message.trim() === "") {
       return;
@@ -95,16 +94,19 @@ const App: React.FC = () => {
     setMessages(newMessages);
 
     setIsTyping(true);
+
     await processMessageToChatGPT(newMessages);
+    await get_desktop_url();
   };
 
   async function processMessageToChatGPT(chatMessages: ChatMessage) {
-    let apiMessages = chatMessages
+    const apiMessages = chatMessages
       .map((messageObject) => {
         if (messageObject.message.trim() === "") {
           return null;
         }
-        let role = messageObject.sender === "assistant" ? "assistant" : "user";
+        const role =
+          messageObject.sender === "assistant" ? "assistant" : "user";
         return { role, content: messageObject.message };
       })
       .filter(Boolean);
@@ -144,7 +146,9 @@ const App: React.FC = () => {
     ]);
     while (true) {
       const { done, value } = await reader.read();
-      if (done) break;
+      if (done) {
+        break;
+      }
 
       const chunk = decoder.decode(value);
       accumulatedMessage += chunk;
@@ -153,7 +157,9 @@ const App: React.FC = () => {
       accumulatedMessage = lines.pop() || "";
 
       for (const line of lines) {
-        if (line.trim() === "") continue;
+        if (line.trim() === "") {
+          continue;
+        }
 
         try {
           const parsed = JSON.parse(line.split("data: ")[1]);
@@ -254,7 +260,13 @@ const App: React.FC = () => {
                 )}
               </Flex>
 
-              <Browser webSocketUrl={webSocketUrl} activeKey={"3"} />
+              {desktopUrl && (
+                <iframe
+                  src={desktopUrl}
+                  style={{ width: "1280px", height: "800px", border: "none" }}
+                  title="DesktopPage"
+                />
+              )}
             </Flex>
           </Flex>
         </div>

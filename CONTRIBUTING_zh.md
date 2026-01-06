@@ -34,12 +34,8 @@
 ### 设置
 
 1. **Fork 并克隆**仓库
-2. **安装 pre-commit**：
-   ```bash
-   pip install pre-commit
-   pre-commit install
-   ```
-3. **创建分支**：
+
+2. **创建分支**：
    ```bash
    git checkout -b feature/your-sample-name
    ```
@@ -126,24 +122,6 @@ your_sample_fullstack_runtime/
 
 每个示例需包含独立的 `requirements.txt` 文件，列出所有必需的依赖项，以确保可独立安装和运行，不依赖其他示例。
 
-#### 代码质量
-
-我们使用 pre-commit hooks 强制执行：
-
-- **Black**：代码格式化（行长度 79）
-- **flake8** 和 **pylint**：代码检查
-- **mypy**：类型检查
-
-编写示例代码时：
-- 添加清晰的注释，遵循现有代码风格
-- 为函数签名添加类型提示
-- 保持代码简单，专注于演示特定功能
-
-确保通过所有检查：
-```bash
-pre-commit run --all-files
-```
-
 ### 提交您的贡献
 
 1. **提交**时使用清晰的消息：
@@ -175,6 +153,6 @@ pre-commit run --all-files
 - **Discord**：加入我们的 Discord 频道进行实时讨论
 - **钉钉**：中国用户可以加入我们的钉钉群
 
-| [Discord](https://discord.gg/eYMpfnkG8h)                                                                                         | DingTalk                                                                                                                          |
-|----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://gw.alicdn.com/imgextra/i1/O1CN01hhD1mu1Dd3BWVUvxN_!!6000000000238-2-tps-400-400.png" width="100" height="100"> | <img src="https://img.alicdn.com/imgextra/i1/O1CN01LxzZha1thpIN2cc2E_!!6000000005934-2-tps-497-477.png" width="100" height="100"> |
+| [Discord](https://discord.gg/eYMpfnkG8h)                     | DingTalk                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://gw.alicdn.com/imgextra/i1/O1CN01hhD1mu1Dd3BWVUvxN_!!6000000000238-2-tps-400-400.png" width="100" height="100"> | <img src="https://img.alicdn.com/imgextra/i4/O1CN014mhqFq1ZlgNuYjxrz_!!6000000003235-2-tps-400-400.png" width="100" height="100"> |
