@@ -111,6 +111,7 @@ jobs:
           done
 
       - name: Tag & Push Images
+        working-directory: alias/src/alias/runtime/alias_sandbox
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -128,7 +129,7 @@ jobs:
           fi
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            IMAGE_BASE=$(python -c "from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
+            IMAGE_BASE=$(python -c "import alias_sandbox; from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
             IMAGE_NAME="${IMAGE_BASE%%:*}"
             if [ -n "$DOCKER_USERNAME" ] && [ -n "$DOCKER_PASSWORD" ]; then
               if [ "$SINGLE" = "true" ]; then
@@ -154,6 +155,7 @@ jobs:
           done
 
       - name: Create Multi-arch Manifest for DockerHub
+        working-directory: alias/src/alias/runtime/alias_sandbox
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -165,7 +167,7 @@ jobs:
           fi
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            IMAGE_BASE=$(python -c "from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
+            IMAGE_BASE=$(python -c "import alias_sandbox; from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
             IMAGE_NAME="${IMAGE_BASE%%:*}"
             AMD_TAG="docker.io/${IMAGE_NAME}:${TAG_INPUT}-linux-amd64"
             ARM_TAG="docker.io/${IMAGE_NAME}:${TAG_INPUT}-linux-arm64"
@@ -179,6 +181,7 @@ jobs:
           done
 
       - name: Create Multi-arch Manifest for Aliyun ACR
+        working-directory: alias/src/alias/runtime/alias_sandbox
         env:
           ALIYUN_ACR_USERNAME: ${{ secrets.ALIYUN_ACR_USERNAME }}
           ALIYUN_ACR_PASSWORD: ${{ secrets.ALIYUN_ACR_PASSWORD }}
@@ -191,7 +194,7 @@ jobs:
           REG="agentscope-registry.ap-southeast-1.cr.aliyuncs.com"
           IFS=',' read -ra TYPES <<< "alias"
           for TYPE in "${TYPES[@]}"; do
-            IMAGE_BASE=$(python -c "from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
+            IMAGE_BASE=$(python -c "import alias_sandbox; from agentscope_runtime.sandbox.registry import SandboxRegistry; print(SandboxRegistry.get_image_by_type('$TYPE'))")
             IMAGE_NAME="${IMAGE_BASE%%:*}"
             AMD_TAG="${REG}/${IMAGE_NAME}:${TAG_INPUT}-linux-amd64"
             ARM_TAG="${REG}/${IMAGE_NAME}:${TAG_INPUT}-linux-arm64"
